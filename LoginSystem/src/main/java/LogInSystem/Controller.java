@@ -1,7 +1,6 @@
 package LogInSystem;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,6 @@ public class Controller {
     @Autowired
     private userService uS;
     
-    @CrossOrigin
     @PostMapping("/signup")
     public String signup(@RequestBody userData u) {
     	
@@ -34,7 +32,6 @@ public class Controller {
     	
     	return "User Already Exits!!";
     }
-    @CrossOrigin
     @PostMapping
     ("/login/{userId}/{password}")
     public String login(@PathVariable String userId, @PathVariable String password) {
@@ -43,7 +40,6 @@ public class Controller {
     	}
         return "Invalid ID or password";
     }
-    @CrossOrigin
     @GetMapping("/resetIn")
     public String resetIn(@RequestBody userData u) {
     	if (uS.resetIn(u)) {
@@ -51,7 +47,6 @@ public class Controller {
     	}
     	return "User not found!";
     }
-    @CrossOrigin
     @PutMapping("/updatePassword/{userId}/{newPassword}")
     public String updatePassword(@PathVariable String userId,@PathVariable String newPassword) {
     	if(uS.updatePassword(userId,newPassword)) {
@@ -60,7 +55,6 @@ public class Controller {
     	return "Password Must Be 8 Digit!";
     }
     
-    @CrossOrigin
     @GetMapping("/checkUserExists/{userId}")
     public boolean checkUserExists(@PathVariable String userId) {
         return uS.userExistsByUserId(userId);
